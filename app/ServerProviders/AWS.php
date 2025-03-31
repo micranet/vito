@@ -135,8 +135,12 @@ class AWS extends AbstractProvider
     {
         $this->connectToEc2Client();
         $this->createKeyPair();
-        $this->createSecurityGroup();
-        $this->runInstance();
+        if (config('serverproviders.aws.custom_run')) {
+            $this->customTunInstance();
+        } else {
+            $this->createSecurityGroup();
+            $this->runInstance();
+        }
     }
 
     public function isRunning(): bool
@@ -252,6 +256,67 @@ class AWS extends AbstractProvider
                 ],
             ],
         ]);
+    }
+
+    private function customTunInstance(): void
+    {
+        try {
+            $keyName = $this->server->name.'-'.$this->server->id;
+            $subnetId = config('serverproviders.aws.subnet_id');
+
+            $amiId = config('serverproviders.aws.ami_id.'.$this->server->os, null);
+            if (! $amiId) {
+                $amiId = $this->getImageId($this->server->os);
+            }
+            $tags = [
+                [
+                    'Key' => 'Name',
+                    'Value' => $this->server->name,
+                ],
+                config('serverproviders.aws.ami_tag'),
+            ];
+
+            // Launch an EC2 instance
+            $result = $this->ec2Client->runInstances([
+                'ImageId' => $amiId,
+                'MinCount' => 1,
+                'MaxCount' => 1,
+                'InstanceType' => $this->server->provider_data['plan'],
+                'KeyName' => $keyName,
+                'BlockDeviceMappings' => [
+                    [
+                        'DeviceName' => '/dev/sda1', // Root device name
+                        'Ebs' => [
+                            'VolumeSize' => 30,
+                            'VolumeType' => 'gp3',
+                            'DeleteOnTermination' => true,
+                        ],
+                    ],
+                ],
+                'SubnetId' => $subnetId, // Ensure the subnet ID is specified here as well
+                'SecurityGroupIds' => config('serverproviders.aws.security_group_ids'),
+                'EbsOptimized' => true,
+                'TagSpecifications' => [
+                    [
+                        'ResourceType' => 'instance',
+                        'Tags' => $tags,
+                    ],
+                    [
+                        'ResourceType' => 'volume',
+                        'Tags' => $tags,
+                    ],
+                    [
+                        'ResourceType' => 'network-interface',
+                        'Tags' => $tags,
+                    ],
+                ],
+                // 'DryRun' => true,
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+            throw $e;
+        }
+
     }
 
     /**

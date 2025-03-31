@@ -2,6 +2,17 @@
 
 return [
     'aws' => [
+        'custom_run' => env('SERVICE_PROVIDER__AWS__CUSTOM_RUN', false),
+        'subnet_id' => env('SERVICE_PROVIDER__AWS__SUBNET_ID', null),
+        'security_group_ids' => explode(',', env('SERVICE_PROVIDER__AWS__SECURITY_GROUPS', null)),
+        'ami_id' => [
+            \App\Enums\OperatingSystem::UBUNTU24 => env('SERVICE_PROVIDER__AWS__AMI_X86_ID', null),
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => env('SERVICE_PROVIDER__AWS__AMI_ARM_ID', null),
+        ],
+        'ami_tag' => [
+            'Key' => env('SERVICE_PROVIDER__AWS__TAG_KEY'),
+            'Value' => env('SERVICE_PROVIDER__AWS__TAG_VALUE'),
+        ],
         'plans' => [
             [
                 'title' => '[t2 nano] 512MB RAM - CPU 1 core(s)',
