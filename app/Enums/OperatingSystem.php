@@ -11,4 +11,6 @@ final class OperatingSystem
     const UBUNTU22 = 'ubuntu_22';
 
     const UBUNTU24 = 'ubuntu_24';
+
+    const UBUNTU24_ARM = 'ubuntu_24_arm';
 }

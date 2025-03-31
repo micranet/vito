@@ -17,11 +17,13 @@ return [
         \App\Enums\OperatingSystem::UBUNTU20,
         \App\Enums\OperatingSystem::UBUNTU22,
         \App\Enums\OperatingSystem::UBUNTU24,
+        \App\Enums\OperatingSystem::UBUNTU24_ARM,
     ],
     'operating_system_versions' => [
         \App\Enums\OperatingSystem::UBUNTU20 => '20.04',
         \App\Enums\OperatingSystem::UBUNTU22 => '22.04',
         \App\Enums\OperatingSystem::UBUNTU24 => '24.04',
+        \App\Enums\OperatingSystem::UBUNTU24_ARM => '24.04',
     ],
     'webservers' => [
         \App\Enums\Webserver::NONE,
@@ -140,31 +142,37 @@ return [
             \App\Enums\OperatingSystem::UBUNTU20 => 'root',
             \App\Enums\OperatingSystem::UBUNTU22 => 'root',
             \App\Enums\OperatingSystem::UBUNTU24 => 'root',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'root',
         ],
         'aws' => [
             \App\Enums\OperatingSystem::UBUNTU20 => 'ubuntu',
             \App\Enums\OperatingSystem::UBUNTU22 => 'ubuntu',
             \App\Enums\OperatingSystem::UBUNTU24 => 'ubuntu',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'ubuntu',
         ],
         'linode' => [
             \App\Enums\OperatingSystem::UBUNTU20 => 'root',
             \App\Enums\OperatingSystem::UBUNTU22 => 'root',
             \App\Enums\OperatingSystem::UBUNTU24 => 'root',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'root',
         ],
         'digitalocean' => [
             \App\Enums\OperatingSystem::UBUNTU20 => 'root',
             \App\Enums\OperatingSystem::UBUNTU22 => 'root',
             \App\Enums\OperatingSystem::UBUNTU24 => 'root',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'root',
         ],
         'vultr' => [
             \App\Enums\OperatingSystem::UBUNTU20 => 'root',
             \App\Enums\OperatingSystem::UBUNTU22 => 'root',
             \App\Enums\OperatingSystem::UBUNTU24 => 'root',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'root',
         ],
         'hetzner' => [
             \App\Enums\OperatingSystem::UBUNTU20 => 'root',
             \App\Enums\OperatingSystem::UBUNTU22 => 'root',
             \App\Enums\OperatingSystem::UBUNTU24 => 'root',
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => 'root',
         ],
     ],
 
@@ -272,6 +280,9 @@ return [
             \App\Enums\OperatingSystem::UBUNTU24 => [
                 'latest' => 'nginx',
             ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
+                'latest' => 'nginx',
+            ],
         ],
         'mysql' => [
             \App\Enums\OperatingSystem::UBUNTU20 => [
@@ -285,6 +296,11 @@ return [
                 '8.4' => 'mysql',
             ],
             \App\Enums\OperatingSystem::UBUNTU24 => [
+                '5.7' => 'mysql',
+                '8.0' => 'mysql',
+                '8.4' => 'mysql',
+            ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
                 '5.7' => 'mysql',
                 '8.0' => 'mysql',
                 '8.4' => 'mysql',
@@ -312,6 +328,13 @@ return [
                 '10.11' => 'mariadb',
                 '11.4' => 'mariadb',
             ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
+                '10.3' => 'mariadb',
+                '10.4' => 'mariadb',
+                '10.6' => 'mariadb',
+                '10.11' => 'mariadb',
+                '11.4' => 'mariadb',
+            ],
         ],
         'postgresql' => [
             \App\Enums\OperatingSystem::UBUNTU20 => [
@@ -329,6 +352,13 @@ return [
                 '16' => 'postgresql',
             ],
             \App\Enums\OperatingSystem::UBUNTU24 => [
+                '12' => 'postgresql',
+                '13' => 'postgresql',
+                '14' => 'postgresql',
+                '15' => 'postgresql',
+                '16' => 'postgresql',
+            ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
                 '12' => 'postgresql',
                 '13' => 'postgresql',
                 '14' => 'postgresql',
@@ -375,6 +405,19 @@ return [
                 '8.3' => 'php8.3-fpm',
                 '8.4' => 'php8.4-fpm',
             ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
+                '5.6' => 'php5.6-fpm',
+                '7.0' => 'php7.0-fpm',
+                '7.1' => 'php7.1-fpm',
+                '7.2' => 'php7.2-fpm',
+                '7.3' => 'php7.3-fpm',
+                '7.4' => 'php7.4-fpm',
+                '8.0' => 'php8.0-fpm',
+                '8.1' => 'php8.1-fpm',
+                '8.2' => 'php8.2-fpm',
+                '8.3' => 'php8.3-fpm',
+                '8.4' => 'php8.4-fpm',
+            ],
         ],
         'redis' => [
             \App\Enums\OperatingSystem::UBUNTU20 => [
@@ -384,6 +427,9 @@ return [
                 'latest' => 'redis',
             ],
             \App\Enums\OperatingSystem::UBUNTU24 => [
+                'latest' => 'redis',
+            ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
                 'latest' => 'redis',
             ],
         ],
@@ -397,6 +443,9 @@ return [
             \App\Enums\OperatingSystem::UBUNTU24 => [
                 'latest' => 'supervisor',
             ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
+                'latest' => 'supervisor',
+            ],
         ],
         'ufw' => [
             \App\Enums\OperatingSystem::UBUNTU20 => [
@@ -408,6 +457,9 @@ return [
             \App\Enums\OperatingSystem::UBUNTU24 => [
                 'latest' => 'ufw',
             ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
+                'latest' => 'ufw',
+            ],
         ],
         'vito-agent' => [
             \App\Enums\OperatingSystem::UBUNTU20 => [
@@ -417,6 +469,9 @@ return [
                 'latest' => 'vito-agent',
             ],
             \App\Enums\OperatingSystem::UBUNTU24 => [
+                'latest' => 'vito-agent',
+            ],
+            \App\Enums\OperatingSystem::UBUNTU24_ARM => [
                 'latest' => 'vito-agent',
             ],
         ],

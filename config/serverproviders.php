@@ -176,6 +176,7 @@ return [
         ],
         'images' => [
             'eu-south-2' => [
+                'ubuntu_24_arm' => 'ami-0a50f993202fe4f22',
                 'ubuntu_24' => 'ami-0a50f993202fe4f22',
                 'ubuntu_22' => 'ami-043e9941c6aec0f52',
                 'ubuntu_20' => 'ami-086f353893612e446',
