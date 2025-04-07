@@ -115,7 +115,7 @@ class WebServiceProvider extends ServiceProvider
                     ->url(fn (): string => Profile\Index::getUrl()),
             ])
             ->login(Login::class)
-            ->spa()
+            // ->spa()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->sidebarCollapsibleOnDesktop()
             ->globalSearchFieldKeyBindingSuffix();
